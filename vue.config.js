@@ -22,7 +22,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: '/web-template/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -49,22 +49,22 @@ module.exports = {
   },
   // 多页面
   // pages: multPage.pages,
-  pages: {
-    index: {
-      // page 的入口
-      entry: 'src/page/index/main.js',
-      // 模板来源
-      template: 'public/index.html',
-      // 在 dist/index.html 的输出
-      filename: 'index.html',
-      // 当使用 title 选项时，
-      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: 'Index Page',
-      // 在这个页面中包含的块，默认情况下会包含
-      // 提取出来的通用 chunk 和 vendor chunk。
-      chunks: ['chunk-vendors', 'chunk-common', 'index']
-    }
-  },
+  // pages: {
+  //   index: {
+  //     // page 的入口
+  //     entry: 'src/page/index/main.js',
+  //     // 模板来源
+  //     template: 'public/index.html',
+  //     // 在 dist/index.html 的输出
+  //     filename: 'index.html',
+  //     // 当使用 title 选项时，
+  //     // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+  //     title: 'Index Page',
+  //     // 在这个页面中包含的块，默认情况下会包含
+  //     // 提取出来的通用 chunk 和 vendor chunk。
+  //     chunks: ['chunk-vendors', 'chunk-common', 'index']
+  //   }
+  // },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -124,14 +124,14 @@ module.exports = {
     config
       .when(process.env.NODE_ENV !== 'development',
         config => {
-          config
-            .plugin('ScriptExtHtmlWebpackPlugin')
-            .after('html')
-            .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
-              inline: /runtime\..*\.js$/
-            }])
-            .end()
+          // config
+          //   .plugin('ScriptExtHtmlWebpackPlugin')
+          //   .after('html')
+          //   .use('script-ext-html-webpack-plugin', [{
+          //   // `runtime` must same as runtimeChunk name. default is `runtime`
+          //     inline: /runtime\..*\.js$/
+          //   }])
+          //   .end()
           config
             .optimization.splitChunks({
               chunks: 'all',
