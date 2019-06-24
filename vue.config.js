@@ -49,22 +49,23 @@ module.exports = {
   },
   // 多页面
   // pages: multPage.pages,
-  // pages: {
-  //   index: {
-  //     // page 的入口
-  //     entry: 'src/page/index/main.js',
-  //     // 模板来源
-  //     template: 'public/index.html',
-  //     // 在 dist/index.html 的输出
-  //     filename: 'index.html',
-  //     // 当使用 title 选项时，
-  //     // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-  //     title: 'Index Page',
-  //     // 在这个页面中包含的块，默认情况下会包含
-  //     // 提取出来的通用 chunk 和 vendor chunk。
-  //     chunks: ['chunk-vendors', 'chunk-common', 'index']
-  //   }
-  // },
+  pages: {
+    index: {
+      // page 的入口
+      entry: 'src/page/index/main.js',
+      // 模板来源
+      template: 'public/index.html',
+      // 在 dist/index.html 的输出
+      filename: 'index.html',
+      // 当使用 title 选项时，
+      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+      title: 'Index Page',
+      // 在这个页面中包含的块，默认情况下会包含
+      // 提取出来的通用 chunk 和 vendor chunk。
+      chunks: ['runtime', 'chunk-elementUI', 'chunk-libs', 'chunk-vendors', 'chunk-common', 'index']
+      // chunks: ['index']
+    }
+  },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -84,8 +85,8 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    config.plugins.delete('preload') // TODO: need test
-    config.plugins.delete('prefetch') // TODO: need test
+    // config.plugins.delete('preload') // TODO: need test
+    // config.plugins.delete('prefetch') // TODO: need test
 
     // set svg-sprite-loader
     config.module
