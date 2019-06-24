@@ -37,7 +37,7 @@ Vue.use(Element, {
 })
 Vue.use(Egrid)
 
-// ×Ô¶¨ÒåÈ«¾Ö¹ıÂËÆ÷
+// è‡ªå®šä¹‰
 Vue.use(VXEUtils, XEUtils, { mounts: ['cookie'] })
 XEUtils.mixin(utils)
 

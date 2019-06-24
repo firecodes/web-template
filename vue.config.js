@@ -1,17 +1,17 @@
 'use strict'
 const path = require('path')
-// const multPage = require('./build/page.js')
+const multPage = require('./build/page.js')
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-let isProduct = !(process.env.NODE_ENV === 'development')
+const isProduct = !(process.env.NODE_ENV === 'development')
 const name = defaultSettings.title || 'sales' // page title
 const port = 8888 // dev port
 module.exports = {
-  publicPath: (isProduct?'/web-template/':''),
+  publicPath: (isProduct ? '/web-template/' : ''),
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: !isProduct,
@@ -37,24 +37,24 @@ module.exports = {
     // after: require('./mock/mock-server.js')
   },
   // 多页面
-  // pages: multPage.pages,
-  pages: {
-    index: {
-      // page 的入口
-      entry: 'src/page/index/main.js',
-      // 模板来源
-      template: 'public/index.html',
-      // 在 dist/index.html 的输出
-      filename: 'index.html',
-      // 当使用 title 选项时，
-      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: 'Index Page',
-      // 在这个页面中包含的块，默认情况下会包含
-      // 提取出来的通用 chunk 和 vendor chunk。
-      chunks: ['runtime', 'chunk-elementUI', 'chunk-libs', 'chunk-vendors', 'chunk-common', 'index']
-      // chunks: ['index']
-    }
-  },
+  pages: multPage.pages,
+  // pages: {
+  //   index: {
+  //     // page 的入口
+  //     entry: 'src/page/index/main.js',
+  //     // 模板来源
+  //     template: 'public/index.html',
+  //     // 在 dist/index.html 的输出
+  //     filename: 'index.html',
+  //     // 当使用 title 选项时，
+  //     // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+  //     title: 'Index Page',
+  //     // 在这个页面中包含的块，默认情况下会包含
+  //     // 提取出来的通用 chunk 和 vendor chunk。
+  //     chunks: ['runtime', 'chunk-elementUI', 'chunk-libs', 'chunk-vendors', 'chunk-common', 'index']
+  //     // chunks: ['index']
+  //   }
+  // },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -105,40 +105,40 @@ module.exports = {
       })
       .end()
     // https://webpack.js.org/configuration/devtool/#development
-    config.when(!isProduct,config => config.devtool('cheap-source-map'))
+    config.when(!isProduct, config => config.devtool('cheap-source-map'))
     config.when(isProduct, config => {
-          // config.plugin('ScriptExtHtmlWebpackPlugin')
-          //   .after('html')
-          //   .use('script-ext-html-webpack-plugin', [{
-          //   // `runtime` must same as runtimeChunk name. default is `runtime`
-          //     inline: /runtime\..*\.js$/
-          //   }])
-          //   .end()
-          //  config.optimization.runtimeChunk('single')
-          config.optimization.splitChunks({
-              chunks: 'all',
-              cacheGroups: {
-                libs: {
-                  name: 'chunk-libs',
-                  test: /[\\/]node_modules[\\/]/,
-                  priority: 10,
-                  chunks: 'initial' // only package third parties that are initially dependent
-                },
-                elementUI: {
-                  name: 'chunk-elementUI', // split elementUI into a single package
-                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
-                },
-                commons: {
-                  name: 'chunk-commons',
-                  test: resolve('src/components'), // can customize your rules
-                  minChunks: 3, //  minimum common number
-                  priority: 5,
-                  reuseExistingChunk: true
-                }
-              }
-            })
+      // config.plugin('ScriptExtHtmlWebpackPlugin')
+      //   .after('html')
+      //   .use('script-ext-html-webpack-plugin', [{
+      //   // `runtime` must same as runtimeChunk name. default is `runtime`
+      //     inline: /runtime\..*\.js$/
+      //   }])
+      //   .end()
+      //  config.optimization.runtimeChunk('single')
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'chunk-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial' // only package third parties that are initially dependent
+          },
+          elementUI: {
+            name: 'chunk-elementUI', // split elementUI into a single package
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+          },
+          commons: {
+            name: 'chunk-commons',
+            test: resolve('src/components'), // can customize your rules
+            minChunks: 3, //  minimum common number
+            priority: 5,
+            reuseExistingChunk: true
+          }
         }
-      )
+      })
+    }
+    )
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="��ʾ"
+    title="提示"
     :visible.sync="dialogVisible"
     width="800"
     :modal="true"
@@ -9,11 +9,11 @@
     :modal-append-to-body="true"
     :lock-scroll="true"
   >
-    <span>����һ����Ϣ</span>
+    <span>这是一段信息</span>
 
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="save">ȷ ��</el-button>
-      <el-button @click="close">ȡ ��</el-button>
+      <el-button type="primary" @click="save">确 定</el-button>
+      <el-button @click="close">取 消</el-button>
     </span>
   </el-dialog>
 </template>
