@@ -41,12 +41,11 @@ import { mapGetters } from 'vuex'
 export default {
   components: {
   },
+  data() {
+    return {}
+  },
   computed: {
     ...mapGetters(['winPage'])
-  },
-  data() {
-    return {
-    }
   },
   created() {
   },
