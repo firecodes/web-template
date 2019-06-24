@@ -4,7 +4,7 @@
       <div class="bullshit">
         <div class="bullshit__oops">404!</div>
         <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">请检查您输入的网址是否正确，可点击以下按钮返回主页或者去往源码主页</div>
+        <div class="bullshit__info">请检查您输入的网址是否正确，可点击以下按钮返回主页</div>
         <p class=""><a href="/"><el-button>返回首页</el-button></a></p>
       </div>
     </div>

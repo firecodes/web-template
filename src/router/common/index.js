@@ -11,8 +11,8 @@ const common = {
   },
   errorRouter() {
     const router = [
-      { path: '401', name: '401', component: page401 },
-      { path: '404', name: '404', component: page404 },
+      { path: '/401', name: '401', component: page401 },
+      { path: '/404', name: '404', component: page404 },
       { path: '*', redirect: '/404', hidden: true }
     ]
     return router

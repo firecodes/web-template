@@ -1,5 +1,6 @@
 <template>
   <div class="vui-block">
+    {{ $t('common.hello') }}
     <main-panel />
 
     <!--所有 窗口界面 -->

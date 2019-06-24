@@ -4,11 +4,9 @@
     <el-row>
       <el-col :span="12">
         <h1 class="text-jumbo text-ginormous">401!</h1>
-
         <h2>你没有权限去该页面</h2>
         <h6>你可以联系你领导，或者你可以去:</h6>
         <ul class="list-unstyled">
-
           <li class="link-type">
             <router-link to="/">回首页</router-link>
           </li>

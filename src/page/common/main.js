@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import store from '@/store'
 import Cookies from 'js-cookie'
+import i18n from '@/i18n' // 国际化
 
 import VXEUtils from 'vxe-utils'
 import XEUtils from 'xe-utils'
@@ -53,6 +54,7 @@ const main = {
     new Vue({
       el: '#app',
       store,
+      i18n,
       router: config.router,
       render: (h) => h(config.App)
     })
