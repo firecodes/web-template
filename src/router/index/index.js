@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-import commonRoter from '@/router/common/index' // 所有界面公共路由
+import common from '@/router/common/index' // 所有界面公共路由
 import layoutUIX1 from '@/components/layout/ui-x1/layout'
 
-const layoutX1 = [{
+const layoutX1 = {
   name: '',
   path: '/',
   component: layoutUIX1,
@@ -15,13 +15,16 @@ const layoutX1 = [{
     path: '/home',
     component: () => import('@/page/index/home/index.vue')
   }]
-}]
+}
 
 // 路由集合
-const routes = [...layoutX1, ...commonRoter]
-
+let routes = []
+routes.push(layoutX1)
+routes = routes.concat(common.getCommonRoter())
 const router = new Router({
-  mode: 'hash',
+  // mode: 'hash',
+  // mode: 'history', //后端支持可开
+  scrollBehavior: () => ({ y: 0 }),
   routes
 })
 export default router

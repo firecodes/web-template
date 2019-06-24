@@ -7,25 +7,14 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+let isProduct = !(process.env.NODE_ENV === 'development')
 const name = defaultSettings.title || 'sales' // page title
-// If your port is set to 80,
-// use administrator privileges to execute the command line.
-// For example, Mac: sudo npm run
 const port = 8888 // dev port
-
-// All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
-  /**
-   * You will need to set publicPath if you plan to deploy your site under a sub path,
-   * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
-   * then publicPath should be set to "/bar/".
-   * In most cases please use '/' !!!
-   * Detail: https://cli.vuejs.org/config/#publicpath
-   */
-  publicPath: '/web-template/',
+  publicPath: (isProduct?'/web-template/':''),
   outputDir: 'dist',
   assetsDir: 'static',
-  lintOnSave: process.env.NODE_ENV === 'development',
+  lintOnSave: !isProduct,
   productionSourceMap: false,
   devServer: {
     port: port,
@@ -115,26 +104,18 @@ module.exports = {
         return options
       })
       .end()
-
-    config
-      // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === 'development',
-        config => config.devtool('cheap-source-map')
-      )
-
-    config
-      .when(process.env.NODE_ENV !== 'development',
-        config => {
-          // config
-          //   .plugin('ScriptExtHtmlWebpackPlugin')
+    // https://webpack.js.org/configuration/devtool/#development
+    config.when(!isProduct,config => config.devtool('cheap-source-map'))
+    config.when(isProduct, config => {
+          // config.plugin('ScriptExtHtmlWebpackPlugin')
           //   .after('html')
           //   .use('script-ext-html-webpack-plugin', [{
           //   // `runtime` must same as runtimeChunk name. default is `runtime`
           //     inline: /runtime\..*\.js$/
           //   }])
           //   .end()
-          config
-            .optimization.splitChunks({
+          //  config.optimization.runtimeChunk('single')
+          config.optimization.splitChunks({
               chunks: 'all',
               cacheGroups: {
                 libs: {
@@ -157,7 +138,6 @@ module.exports = {
                 }
               }
             })
-          config.optimization.runtimeChunk('single')
         }
       )
   }

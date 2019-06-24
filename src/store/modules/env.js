@@ -5,7 +5,8 @@ const state = {
 
 const mutations = {
   SET_WINPAGE: (state, winPage) => {
-    state.winPage = winPage
+    winPage = winPage || {}
+    state.winPage = Object.assign({}, state.winPage, winPage)
   }
 }
 

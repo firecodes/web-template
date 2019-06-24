@@ -76,7 +76,7 @@ export default {
       this.chart5.setOption(option5)
     },
     setPageSize(e) {
-      console.log('echarts --- setPageSize:' + e)
+      // console.log('echarts --- setPageSize:' + e)
       // 销毁echarts 组件
       const chartGroup = [this.chart1, this.chart2, this.chart3, this.chart4, this.chart5]
       chartGroup.forEach((item) => {

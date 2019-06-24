@@ -2,6 +2,10 @@ import Vue from 'vue'
 import store from '@/store'
 import Cookies from 'js-cookie'
 
+import VXEUtils from 'vxe-utils'
+import XEUtils from 'xe-utils'
+import utils from '@/common/utils'
+
 import Element from 'element-ui'
 import Egrid from '@/components/element/egrid/src'
 import echarts from 'echarts'
@@ -14,8 +18,6 @@ import '@/assets/styles/index.scss' // global css
 
 // import '@/icons' // icons
 // import './permission' // permission control
-
-import * as filters from '@/filters' // global filters
 
 /**
  * If you don't want to use mock-server
@@ -35,10 +37,9 @@ Vue.use(Element, {
 })
 Vue.use(Egrid)
 
-// register global utility filters
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
+// 自定义全局过滤器
+Vue.use(VXEUtils, XEUtils, { mounts: ['cookie'] })
+XEUtils.mixin(utils)
 
 Vue.config.productionTip = false
 Vue.prototype.API = API

@@ -8,7 +8,7 @@
     <el-row>
       <el-col :span="7">
         <el-form-item label="产品名称">
-          <a class="">111</a>
+          <a class="" @click="openConfigDialog">openConfigDialog</a>
         </el-form-item>
         <el-form-item label="工单号">
           <a class="">111</a>
@@ -36,9 +36,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
+  },
+  computed: {
+    ...mapGetters(['winPage'])
   },
   data() {
     return {
@@ -47,6 +51,17 @@ export default {
   created() {
   },
   methods: {
+    openConfigDialog() {
+      var configDialog = this.winPage.configDialog
+      configDialog.visible = true
+      configDialog.data = { a: 'aa' }
+      configDialog.callbcakSave = function(data) {
+        console.log('callbcakSave:' + data)
+      }
+      configDialog.callbackClose = function(data) {
+        console.log('callbackClose:' + data)
+      }
+    }
   }
 }
 </script>

@@ -3,6 +3,9 @@
 
 ```bash
 
+## npm registry
+npm config set registry https://registry.npm.taobao.org
+
 # enter the project directory
 cd web-template
 
@@ -15,7 +18,7 @@ npm run dev
 
 This will automatically open http://localhost:8888
 
-## Build
+# Build
 
 # build for production environment
 npm run build:prod
