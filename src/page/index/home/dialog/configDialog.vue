@@ -1,5 +1,6 @@
 <template>
   <el-dialog
+    v-if="dialogVisible"
     title="提示"
     :visible.sync="dialogVisible"
     width="800"
@@ -11,10 +12,10 @@
   >
     <span>这是一段信息</span>
 
-    <span slot="footer" class="dialog-footer">
+    <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="save">确 定</el-button>
       <el-button @click="close">取 消</el-button>
-    </span>
+    </div>
   </el-dialog>
 </template>
 
@@ -47,13 +48,17 @@ export default {
     },
     dialogVisible(value) {
       if (value) {
-        this.open()
+        this.$nextTick(() => {
+          this.open()
+        })
       } else {
-        this.$emit('visible.sync', false)
+        this.$emit('update:visible', false)
       }
     }
   },
-  created() {},
+  created() {
+
+  },
   methods: {
     open() {
       const op = this.op
