@@ -3,6 +3,9 @@ import store from '@/store'
 import Cookies from 'js-cookie'
 import i18n from '@/i18n' // 国际化
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import VXEUtils from 'vxe-utils'
 import XEUtils from 'xe-utils'
 import utils from '@/common/utils'
@@ -32,6 +35,7 @@ import '@/assets/styles/index.scss' // global css
 // if (process.env.NODE_ENV === 'production') {
 //   mockXHR()
 // }
+Vue.use(VueAxios, axios)
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
