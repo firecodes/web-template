@@ -1,42 +1,29 @@
 <template>
-  <el-table
-    ref="grid"
-    class="egrid"
-    :data="data"
-    v-bind="tableBind"
-    v-on="$listeners"
-  >
+  <el-table ref="grid" class="egrid" :data="data" v-bind="tableBind" v-on="$listeners">
     <template v-for="tp in typesColumns">
-      <el-table-column
-        v-if="tp.type === 'expand'"
-        :key="tp.type"
-        v-bind="tp.props"
-        type="expand"
-      >
+      <el-table-column v-if="tp.type === 'expand'" :key="tp.type" v-bind="tp.props" type="expand">
         <template slot-scope="props">
           <slot name="expand" v-bind="props" />
         </template>
       </el-table-column>
-      <el-table-column
-        v-else
-        :key="tp.type"
-        :type="tp.type"
-        v-bind="tp.props"
-      />
+      <el-table-column v-else :key="tp.type" :type="tp.type" v-bind="tp.props" />
     </template>
-    <el-table-column
-      v-for="col in renderColumns"
-      :key="col.label"
-      v-bind="getColBind(col)"
-    >
-      <template slot-scope="scope">
-        <component
-          :is="col.component"
-          v-bind="getCptBind(scope, col)"
-          v-on="col.listeners"
-        />
+    <template v-for="(col,index) in renderColumns">
+      <template v-if="col.template">
+        <el-table-column :key="index" v-bind="getColBind(col)">
+          <template slot-scope="scope">
+            <slot :is="col.template" :name="col.template" :$index="scope.index" :row="scope.row" :store="scope.store" />
+          </template>
+        </el-table-column>
       </template>
-    </el-table-column>
+      <template v-else>
+        <el-table-column :key="index" v-bind="getColBind(col)">
+          <template slot-scope="scope">
+            <component :is="col.component" v-bind="getCptBind(scope, col)" v-on="col.listeners" />
+          </template>
+        </el-table-column>
+      </template>
+    </template>
     <template v-if="slotAppend" slot="append">
       <slot name="append" />
     </template>
@@ -124,7 +111,7 @@ export default {
     columnsHandler: {
       type: Function,
       default() {
-        return () => {}
+        return null
       }
     },
     slotAppend: Boolean
@@ -142,7 +129,6 @@ export default {
       })
       return bind
     },
-
     renderColumns() {
       const {
         columns,
@@ -161,7 +147,6 @@ export default {
       })
       return columnsHandler && columnsHandler(renderColumns) || renderColumns
     },
-
     // 用于渲染特殊列
     typesColumns() {
       const { columnType: type, columnTypeProps } = this
@@ -190,7 +175,6 @@ export default {
       delete bind.propsHandler
       return bind
     },
-
     getCptBind({ row, column }, col) {
       const props = { row, col, column }
       const handler = col.propsHandler

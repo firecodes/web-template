@@ -38,7 +38,7 @@ import '@/assets/styles/index.scss' // global css
 Vue.use(VueAxios, axios)
 
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium' // set element-ui default size
+  size: Cookies.get('size') || 'small' // set element-ui default size
 })
 Vue.use(Egrid)
 

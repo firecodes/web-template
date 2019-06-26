@@ -16,6 +16,9 @@
         <el-form-item label="预计完成时间">
           <a class="">111</a>
         </el-form-item>
+        <el-form-item label="工单数量">
+          <a class="">111</a>
+        </el-form-item>
       </el-col>
       <el-col :span="7">
         <el-form-item label="生产班组">
@@ -29,7 +32,11 @@
         </el-form-item>
       </el-col>
       <el-col :span="10">
-        图表
+        <egrid stripe max-height="300" :data="grid.data" :columns="grid.columns" :show-header="false">
+          <template slot="address" slot-scope="scope">
+            {{ scope.row.address }}+'999'
+          </template>
+        </egrid>
       </el-col>
     </el-row>
   </el-form>
@@ -42,7 +49,22 @@ export default {
   components: {
   },
   data() {
-    return {}
+    return {
+      grid: {
+        columns: [{ prop: 'address', template: 'address', 'min-width': 200, 'show-overflow-tooltip': true }],
+        data: [{
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          address: '上海市普陀区金沙江路 1516 弄'
+        }, {
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
+      }
+    }
   },
   computed: {
     ...mapGetters(['winPage'])
