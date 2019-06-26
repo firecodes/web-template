@@ -32,7 +32,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="10">
-        <egrid stripe max-height="300" :data="grid.data" :columns="grid.columns" :show-header="false">
+        <egrid stripe max-height="300" :data="grid.data" :columns="grid.columns" :op="grid" :show-header="false" :empty-text="''">
           <template slot="address" slot-scope="scope">
             {{ scope.row.address }}+'999'
           </template>
@@ -51,7 +51,8 @@ export default {
   data() {
     return {
       grid: {
-        columns: [{ prop: 'address', template: 'address', 'min-width': 200, 'show-overflow-tooltip': true }],
+        // showPage: true, // 是否显示分页
+        columns: [{ prop: 'address', label: 'address', template: 'address', 'min-width': 200, 'show-overflow-tooltip': true }],
         data: [{
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
