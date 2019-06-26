@@ -3,7 +3,7 @@ import { param2Obj } from '../src/common/utils/common'
 
 // import user from './user'
 import article from './article'
-// import search from './remote-search'
+// import search from './search'
 
 const mocks = [
   // ...user,

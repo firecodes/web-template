@@ -20,6 +20,9 @@ import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import '@/assets/styles/element-variables.scss'
 import '@/assets/styles/index.scss' // global css
 
+// 自定义指令
+import '@/directive/index'
+
 // import '@/icons' // icons
 // import './permission' // permission control
 
@@ -35,6 +38,7 @@ import '@/assets/styles/index.scss' // global css
 // if (process.env.NODE_ENV === 'production') {
 //   mockXHR()
 // }
+window.Vue = Vue
 Vue.use(VueAxios, axios)
 
 Vue.use(Element, {
