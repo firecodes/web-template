@@ -63,11 +63,7 @@ module.exports = {
       alias: {
         '@': resolve('src'),
         '@assets': resolve('src/assets'),
-        // '@less': resolve('src/assets/less'),
-        // '@js': resolve('src/assets/js'),
-        // '@mixins': resolve('src/mixins'),
         '@components': resolve('src/components'),
-        '@filters': resolve('src/filters'),
         '@store': resolve('src/store'),
         '@page': resolve('src/page')
       }

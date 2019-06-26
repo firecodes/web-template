@@ -34,4 +34,4 @@ let pages =  {
   // 输出文件名会被推导为 `subpage.html`。
 }
 
-module.exports.page
+module.exports.pages = pages

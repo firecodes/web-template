@@ -1,3 +1,3 @@
 
-import '@/page/index/main.js'
+// import '@/page/index/main.js'
 
