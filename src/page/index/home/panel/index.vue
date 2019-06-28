@@ -2,16 +2,19 @@
   <div class="vui-panel">
     <formDetail />
     <echartDetail />
+    <searchGrid />
   </div>
 </template>
 
 <script>
 import formDetail from './formDetail'
 import echartDetail from './echartDetail'
+import searchGrid from './searchGrid'
 export default {
   components: {
     formDetail,
-    echartDetail
+    echartDetail,
+    searchGrid
   },
   data() {
     return {

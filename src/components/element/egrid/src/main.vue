@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading" class="egrid-block">
     <el-table
-      ref="grid"
+      ref="table"
       class="egrid"
       :data="data"
       v-bind="tableBind"
@@ -39,6 +39,7 @@
     </el-table>
     <template v-if="isShowPage">
       <el-pagination
+        ref="pagination"
         background
         :disabled="loading"
         :current-page="pagerOp.pageVO.currentPage"
@@ -165,6 +166,10 @@ export default {
     }
   },
   computed: {
+    widght() {
+      const { table, pagination } = this.$refs
+      return { table, pagination }
+    },
     // 处理 $attrs 里面 Boolean 类型的 prop 和统一 prop 命名
     tableBind() {
       const { $attrs } = this
