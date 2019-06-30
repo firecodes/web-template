@@ -64,8 +64,13 @@ export default {
       const scope = this
       const { grid } = scope.$refs
       const pageVO = grid.pagerOp.pageVO
+      const params = {
+        page: pageVO.currentPage,
+        limit: pageVO.pageSize,
+        sort: '+id'
+      }
       grid.loading = true
-      scope.API.mock.fetchList({ a: '111', pageVO }, function(success, data) {
+      scope.API.mock.fetchList(params, function(success, data) {
         grid.loading = false
         if (success) {
           scope.gridOp.data = data.items
