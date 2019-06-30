@@ -3,9 +3,12 @@
     <el-table
       ref="table"
       class="egrid"
+      style="width: 100%;"
       :data="data"
       v-bind="tableBind"
       :tooltip-effect="'light'"
+      border
+      fit
       v-on="$listeners"
       @selection-change="handleSelectionChange"
     >
@@ -40,6 +43,7 @@
     <template v-if="isShowPage">
       <el-pagination
         ref="pagination"
+        class="egrid-pagination"
         background
         :disabled="loading"
         :current-page="pagerOp.pageVO.currentPage"
@@ -271,3 +275,12 @@ export default {
   }
 }
 </script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
+.el-pagination{
+  &.egrid-pagination{
+    text-align: right;
+    margin-top: 10px;
+  }
+}
+</style>
