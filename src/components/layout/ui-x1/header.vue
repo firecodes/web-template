@@ -1,39 +1,36 @@
 <template>
   <div class="app-header">
-    <div class="app-logo" />
-    <el-menu :default-active="activeIndex" class="app-menu" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">首页</el-menu-item>
-    </el-menu>
+    <public-header :home-url="homeUrl" @switchLanguage="switchLanguage" />
   </div>
 </template>
 
 <script>
+import { publicHeader } from '@firecodes/vue-lui/packages'
 
 export default {
   name: 'Header',
-  components: {},
+  components: { publicHeader },
   data() {
     return {
-      activeIndex: '1'
+      homeUrl: {
+        logo: ''
+      }
     }
   },
   computed: {
   },
   methods: {
-    handleSelect() {}
+    // 切换 语言成功
+    switchLanguage() {
+
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .app-header{
-  width: 1200px ;
+  width: 100%;
   margin: 0px auto;
-  .app-logo{
-    width: 200px;
-  }
-  .app-menu{
-    width: 800px;
-  }
 }
 </style>

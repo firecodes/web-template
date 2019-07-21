@@ -26,5 +26,7 @@ export default {
 .app-main{
   width: 1200px;
   margin: 0px auto;
+  position: relative;
+  padding-top: 70px;
 }
 </style>
