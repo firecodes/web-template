@@ -21,7 +21,7 @@ import '@/assets/styles/element-variables.scss'
 import '@/assets/styles/index.scss' // global css
 
 // 自定义指令
-import '@/directive/index'
+import '@/common/directive/index'
 
 // import '@/icons' // icons
 // import './permission' // permission control
