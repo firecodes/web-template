@@ -14,6 +14,10 @@ const layoutX1 = {
     name: 'home',
     path: '/home',
     component: () => import('@/page/index/home/index.vue')
+  }, {
+    name: 'plug',
+    path: '/plug',
+    component: () => import('@/page/index/plug/index.vue')
   }]
 }
 

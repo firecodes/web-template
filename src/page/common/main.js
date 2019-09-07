@@ -1,70 +1,35 @@
 import Vue from 'vue'
 import store from '@/store'
-import Cookies from 'js-cookie'
 import i18n from '@/i18n' // 国际化
 
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-import VXEUtils from 'vxe-utils'
-import XEUtils from 'xe-utils'
-import utils from '@/common/utils'
-
-import Element from 'element-ui'
-import Egrid from '@/components/element/egrid/src'
-import echarts from 'echarts'
-
-import API from '@/api/index'
-
-import 'normalize.css/normalize.css' // a modern alternative to CSS resets
-import '@/assets/styles/element-variables.scss'
-import '@/assets/styles/index.scss' // global css
-
-// 自定义指令
-import '@/common/directive/index'
-
-// import '@/icons' // icons
-// import './permission' // permission control
-
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online! ! !
- */
-// import { mockXHR } from '@/mock'
-// if (process.env.NODE_ENV === 'production') {
-//   mockXHR()
-// }
-window.Vue = Vue
-Vue.use(VueAxios, axios)
-
-Vue.use(Element, {
-  size: Cookies.get('size') || 'small' // set element-ui default size
-})
-Vue.use(Egrid)
-
-// 自定义
-Vue.use(VXEUtils, XEUtils, { mounts: ['cookie'] })
-XEUtils.mixin(utils)
-
-Vue.config.productionTip = false
-Vue.prototype.API = API
-Vue.prototype.$echarts = echarts
+// 登录请求认证，获取用户信息，频道用户是否已登录
+const login = {
+  init(config, callback) {
+    callback()
+  }
+}
 
 const main = {
   init(config) {
-    this.runApp(config)
+    const scope = this
+    login.init(config, function() {
+      scope.runApp(config)
+    })
   },
   runApp(config) {
-    new Vue({
-      el: '#app',
-      store,
-      i18n,
-      router: config.router,
-      render: (h) => h(config.App)
+    Promise.all([
+      new Promise((resolve, reject) => {
+        // 组件注册写在APP， 避免全加载
+        resolve(import('./init-app'))
+      })
+    ]).then((r) => {
+      new Vue({
+        el: '#app',
+        store,
+        i18n,
+        router: config.router,
+        render: (h) => h(config.App)
+      })
     })
   }
 }
