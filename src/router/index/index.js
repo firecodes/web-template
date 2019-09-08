@@ -13,11 +13,13 @@ const layoutX1 = {
   children: [{
     name: 'home',
     path: '/home',
-    component: () => import('@/page/index/home/index.vue')
+    // component: () => import('@/page/index/home/index.vue')
+    component: resolve => require(['@/page/index/home/index.vue'], resolve)
   }, {
     name: 'plug',
     path: '/plug',
-    component: () => import('@/page/index/plug/index.vue')
+    // component: () => import('@/page/index/plug/index.vue')
+    component: resolve => require(['@/page/index/plug/index.vue'], resolve)
   }]
 }
 
