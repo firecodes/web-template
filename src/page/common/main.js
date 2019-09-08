@@ -20,7 +20,9 @@ const main = {
     Promise.all([
       new Promise((resolve, reject) => {
         // 组件注册写在APP， 避免全加载
-        resolve(import('./init-app'))
+        import('./init-app').then((APP) => {
+          resolve(APP.default.init())
+        })
       })
     ]).then((r) => {
       new Vue({

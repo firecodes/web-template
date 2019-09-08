@@ -51,12 +51,12 @@ Vue.use(VXEUtils, XEUtils, { mounts: ['cookie'] })
 XEUtils.mixin(utils)
 
 // 封装全局组件
-import formInputTextarea from '@/components/element/form/input-textarea'
-Vue.component('formInputTextarea', formInputTextarea)
+// import formInputTextarea from '@/components/element/form/input-textarea'
+// Vue.component('formInputTextarea', formInputTextarea)
 // 注册全局组件，改为预加载，界面初始化用到就加载
-// Vue.component('formInputTextarea', function(resolve) {
-//   resolve(['@/components/element/form/input-textarea/index'])
-// })
+Vue.component('formInputTextarea', function(resolve) {
+  require(['@/components/element/form/input-textarea/index'], resolve)
+})
 
 Vue.config.productionTip = false
 Vue.prototype.API = API
